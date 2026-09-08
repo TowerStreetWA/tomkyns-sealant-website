@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Exclude portal routes from search engines
+Disallow: /portal
+Disallow: /sign-in
+Disallow: /sign-up

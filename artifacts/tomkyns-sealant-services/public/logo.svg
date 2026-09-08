@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" width="100%" height="100%">
+  <!-- Background is transparent -->
+  <g transform="translate(10, 10)">
+    <!-- Shield/Mark -->
+    <path d="M 15 10 L 45 0 L 75 10 L 75 40 C 75 70 45 95 45 95 C 45 95 15 70 15 40 Z" fill="none" stroke="#0a192f" stroke-width="4" stroke-linejoin="round"/>
+    <!-- Central T -->
+    <path d="M 30 25 L 60 25" fill="none" stroke="#1e3f20" stroke-width="6" stroke-linecap="round"/>
+    <path d="M 45 25 L 45 65" fill="none" stroke="#1e3f20" stroke-width="6" stroke-linecap="round"/>
+    <!-- Text -->
+    <text x="105" y="45" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="34" font-weight="800" fill="#0a192f" letter-spacing="-1">TOMKYNS</text>
+    <text x="105" y="75" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1e3f20" letter-spacing="3">SEALANT SERVICES</text>
+  </g>
+</svg>

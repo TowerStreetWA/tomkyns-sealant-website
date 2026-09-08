@@ -1,0 +1,396 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: Tomkyns Sealant Services website and owner portal API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: enquiries
+    description: Public quote requests and owner enquiry management
+  - name: jobs
+    description: Owner job tracking
+  - name: dashboard
+    description: Owner dashboard summaries
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /enquiries:
+    get:
+      operationId: listEnquiries
+      tags: [enquiries]
+      summary: List enquiries
+      security:
+        - clerkSession: []
+      responses:
+        "200":
+          description: Enquiry list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Enquiry"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+    post:
+      operationId: createEnquiry
+      tags: [enquiries]
+      summary: Submit a free quote request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EnquiryInput"
+      responses:
+        "201":
+          description: Enquiry created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Enquiry"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+  /enquiries/{id}:
+    patch:
+      operationId: updateEnquiry
+      tags: [enquiries]
+      summary: Update an enquiry
+      security:
+        - clerkSession: []
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EnquiryUpdate"
+      responses:
+        "200":
+          description: Updated enquiry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Enquiry"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      operationId: deleteEnquiry
+      tags: [enquiries]
+      summary: Delete an enquiry
+      security:
+        - clerkSession: []
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "204":
+          description: Enquiry deleted
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /jobs:
+    get:
+      operationId: listJobs
+      tags: [jobs]
+      summary: List jobs
+      security:
+        - clerkSession: []
+      responses:
+        "200":
+          description: Job list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Job"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+    post:
+      operationId: createJob
+      tags: [jobs]
+      summary: Create a job
+      security:
+        - clerkSession: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JobInput"
+      responses:
+        "201":
+          description: Job created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Job"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /jobs/{id}:
+    patch:
+      operationId: updateJob
+      tags: [jobs]
+      summary: Update a job
+      security:
+        - clerkSession: []
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JobUpdate"
+      responses:
+        "200":
+          description: Updated job
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Job"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+    delete:
+      operationId: deleteJob
+      tags: [jobs]
+      summary: Delete a job
+      security:
+        - clerkSession: []
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "204":
+          description: Job deleted
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /dashboard/summary:
+    get:
+      operationId: getDashboardSummary
+      tags: [dashboard]
+      summary: Get owner dashboard summary
+      security:
+        - clerkSession: []
+      responses:
+        "200":
+          description: Dashboard summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardSummary"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+  responses:
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+  securitySchemes:
+    clerkSession:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+    Enquiry:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        phone:
+          type: string
+        email:
+          type: ["string", "null"]
+        postcode:
+          type: ["string", "null"]
+        details:
+          type: ["string", "null"]
+        status:
+          type: string
+          enum: [new, contacted, quoted, booked, complete, archived]
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required: [id, name, phone, email, postcode, details, status, createdAt, updatedAt]
+    EnquiryInput:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 2
+        phone:
+          type: string
+          minLength: 5
+        email:
+          type: ["string", "null"]
+          format: email
+        postcode:
+          type: ["string", "null"]
+        details:
+          type: ["string", "null"]
+      required: [name, phone]
+    EnquiryUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [new, contacted, quoted, booked, complete, archived]
+    Job:
+      type: object
+      properties:
+        id:
+          type: integer
+        clientName:
+          type: string
+        clientContact:
+          type: ["string", "null"]
+        location:
+          type: ["string", "null"]
+        jobType:
+          type: string
+        scheduledDate:
+          type: ["string", "null"]
+          format: date
+        status:
+          type: string
+          enum: [booked, in_progress, complete]
+        notes:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required: [id, clientName, clientContact, location, jobType, scheduledDate, status, notes, createdAt, updatedAt]
+    JobInput:
+      type: object
+      properties:
+        clientName:
+          type: string
+          minLength: 2
+        clientContact:
+          type: ["string", "null"]
+        location:
+          type: ["string", "null"]
+        jobType:
+          type: string
+          minLength: 2
+        scheduledDate:
+          type: ["string", "null"]
+          format: date
+        status:
+          type: string
+          enum: [booked, in_progress, complete]
+        notes:
+          type: ["string", "null"]
+      required: [clientName, jobType]
+    JobUpdate:
+      type: object
+      properties:
+        clientName:
+          type: string
+          minLength: 2
+        clientContact:
+          type: ["string", "null"]
+        location:
+          type: ["string", "null"]
+        jobType:
+          type: string
+          minLength: 2
+        scheduledDate:
+          type: ["string", "null"]
+          format: date
+        status:
+          type: string
+          enum: [booked, in_progress, complete]
+        notes:
+          type: ["string", "null"]
+    DashboardSummary:
+      type: object
+      properties:
+        newEnquiries:
+          type: integer
+        activeJobs:
+          type: integer
+        completedJobs:
+          type: integer
+        totalEnquiries:
+          type: integer
+        recentEnquiries:
+          type: array
+          items:
+            $ref: "#/components/schemas/Enquiry"
+      required: [newEnquiries, activeJobs, completedJobs, totalEnquiries, recentEnquiries]
+
