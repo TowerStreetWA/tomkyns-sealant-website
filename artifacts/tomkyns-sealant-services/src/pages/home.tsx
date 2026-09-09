@@ -17,6 +17,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Badge } from "@/components/ui/badge";
+import SocialLinks from "@/components/social-links";
 
 // -- Data --
 const SERVICES = [
@@ -419,6 +420,9 @@ export default function HomePage() {
                         <a href="mailto:jongildea@tomkynssealant.co.uk" className="hover:text-primary font-medium block">jongildea@tomkynssealant.co.uk</a>
                       </p>
                       <p className="text-sm text-muted-foreground mt-2">Common Farm, Tomkyns Lane, Upminster, RM14 1TP</p>
+                       <div className="mt-5">
+                         <SocialLinks />
+                       </div>
                     </div>
                   </div>
                 </div>
@@ -543,6 +547,7 @@ export default function HomePage() {
           <div className="flex items-center gap-3 bg-white px-3 py-2 rounded-sm shadow-md">
             <img src="/logo.png" alt="Tomkyns Sealant Services" className="h-10 w-auto object-contain" />
           </div>
+           <SocialLinks dark />
           <div className="text-sm text-white/50 text-center md:text-right">
             &copy; {new Date().getFullYear()} Tomkyns Sealant Services. All rights reserved. <br/>
             Based at Common Farm, Tomkyns Lane, Upminster, RM14 1TP

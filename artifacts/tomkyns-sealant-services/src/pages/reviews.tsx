@@ -3,6 +3,7 @@ import { Phone, Mail, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FcGoogle } from "react-icons/fc";
 import { Star } from "lucide-react";
+import SocialLinks from "@/components/social-links";
 
 const GOOGLE_REVIEWS = [
   { 
@@ -177,6 +178,7 @@ export default function ReviewsPage() {
           <div className="flex items-center gap-3 bg-white px-3 py-2 rounded-sm shadow-md">
             <img src="/logo.png" alt="Tomkyns Sealant Services" className="h-10 w-auto object-contain" />
           </div>
+           <SocialLinks dark />
           <div className="text-sm text-white/50 text-center md:text-right">
             &copy; {new Date().getFullYear()} Tomkyns Sealant Services. All rights reserved. <br/>
             Based at Common Farm, Tomkyns Lane, Upminster, RM14 1TP
