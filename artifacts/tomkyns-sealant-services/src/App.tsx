@@ -10,6 +10,7 @@ import { queryClient } from "@/lib/queryClient";
 
 import HomePage from "@/pages/home";
 import ReviewsPage from "@/pages/reviews";
+import BusinessPortal from "@/pages/business-portal";
 import PortalDashboard from "@/pages/portal/dashboard";
 import PortalEnquiries from "@/pages/portal/enquiries";
 import PortalJobs from "@/pages/portal/jobs";
@@ -166,6 +167,7 @@ function ClerkProviderWithRoutes() {
               {/* Public route */}
               <Route path="/" component={HomePage} />
               <Route path="/reviews" component={ReviewsPage} />
+              <Route path="/business-portal" component={BusinessPortal} />
               
               {/* Auth routes */}
               <Route path="/sign-in/*?" component={SignInPage} />

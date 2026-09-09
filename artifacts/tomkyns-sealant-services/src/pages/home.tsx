@@ -166,6 +166,7 @@ export default function HomePage() {
                document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
              }} className="hover:text-primary transition-colors cursor-pointer">Services</a>
              <Link href="/reviews" className="hover:text-primary transition-colors">Reviews</Link>
+              <Link href="/business-portal" className="hover:text-primary transition-colors">Business Portal</Link>
              <a href="#quote" onClick={(e) => {
                e.preventDefault();
                scrollToQuote();
