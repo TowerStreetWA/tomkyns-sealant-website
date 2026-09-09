@@ -18,6 +18,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Badge } from "@/components/ui/badge";
 import SocialLinks from "@/components/social-links";
+import MobileSiteNav from "@/components/mobile-site-nav";
 
 // -- Data --
 const SERVICES = [
@@ -173,14 +174,15 @@ export default function HomePage() {
                scrollToQuote();
              }} className="hover:text-primary transition-colors cursor-pointer">Contact</a>
           </div>
-          <div className="flex items-center gap-4">
+           <div className="flex items-center gap-4">
             <div className="hidden md:flex flex-col items-end mr-4">
               <span className="text-sm text-muted-foreground font-medium">Call Jon direct</span>
               <a href="tel:07596095248" className="text-foreground font-display font-bold text-lg hover:text-primary transition-colors">07596 095248</a>
             </div>
-            <Button onClick={scrollToQuote} size="lg" className="font-semibold shadow-sm" data-testid="button-nav-quote">
+             <Button onClick={scrollToQuote} size="lg" className="hidden font-semibold shadow-sm md:inline-flex" data-testid="button-nav-quote">
               Get a Free Quote
             </Button>
+             <MobileSiteNav active="home" onQuote={scrollToQuote} />
           </div>
         </div>
       </header>

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { FcGoogle } from "react-icons/fc";
 import { Star } from "lucide-react";
 import SocialLinks from "@/components/social-links";
+import MobileSiteNav from "@/components/mobile-site-nav";
 
 const GOOGLE_REVIEWS = [
   { 
@@ -84,6 +85,7 @@ export default function ReviewsPage() {
              <Link href="/" className="hover:text-primary transition-colors">Home</Link>
              <a href="/#services" className="hover:text-primary transition-colors">Services</a>
              <Link href="/reviews" className="text-primary transition-colors">Reviews</Link>
+             <Link href="/business-portal" className="hover:text-primary transition-colors">Business Portal</Link>
              <a href="/#quote" className="hover:text-primary transition-colors">Contact</a>
           </div>
           <div className="flex items-center gap-4">
@@ -91,9 +93,10 @@ export default function ReviewsPage() {
               <span className="text-sm text-muted-foreground font-medium">Call Jon direct</span>
               <a href="tel:07596095248" className="text-foreground font-display font-bold text-lg hover:text-primary transition-colors">07596 095248</a>
             </div>
-            <Button asChild size="lg" className="font-semibold shadow-sm" data-testid="button-nav-quote">
+             <Button asChild size="lg" className="hidden font-semibold shadow-sm md:inline-flex" data-testid="button-nav-quote">
               <a href="/#quote">Get a Free Quote</a>
             </Button>
+             <MobileSiteNav active="reviews" />
           </div>
         </div>
       </header>
