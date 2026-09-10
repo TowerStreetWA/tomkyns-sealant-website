@@ -235,10 +235,10 @@ export default function HomePage() {
                    src={`${assetBase}hero-before-after-poster.jpg`}
                   alt=""
                   aria-hidden="true"
-                  className="absolute inset-0 h-full w-full object-cover"
+                   className="absolute inset-0 h-full w-full bg-foreground object-contain"
                 />
                 <video
-                  className="hero-motion-video absolute inset-0 h-full w-full object-cover"
+                   className="hero-motion-video absolute inset-0 h-full w-full bg-foreground object-contain"
                   autoPlay
                   muted
                   loop
