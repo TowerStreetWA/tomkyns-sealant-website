@@ -232,7 +232,7 @@ export default function HomePage() {
             <div className="flex-1 w-full max-w-3xl xl:max-w-lg relative">
               <div className="relative h-[400px] sm:h-[440px] xl:h-auto xl:aspect-[16/9] rounded-2xl bg-foreground text-white overflow-hidden flex flex-col justify-end shadow-2xl">
                 <img
-                  src={`${assetBase}hero-careful-mastic-fallback.jpg`}
+                   src={`${assetBase}hero-before-after-poster.jpg`}
                   alt=""
                   aria-hidden="true"
                   className="absolute inset-0 h-full w-full object-cover"
@@ -244,11 +244,11 @@ export default function HomePage() {
                   loop
                   playsInline
                   preload="metadata"
-                  poster={`${assetBase}hero-careful-mastic-fallback.jpg`}
+                   poster={`${assetBase}hero-before-after-poster.jpg`}
                   aria-hidden="true"
                   tabIndex={-1}
                 >
-                  <source src={`${assetBase}hero-careful-mastic.mp4`} type="video/mp4" />
+                   <source src={`${assetBase}hero-before-after.mp4`} type="video/mp4" />
                 </video>
                 <div className="hero-panel-scrim absolute inset-0" aria-hidden="true" />
                 <div className="absolute top-0 right-0 p-8 opacity-10 text-white">
