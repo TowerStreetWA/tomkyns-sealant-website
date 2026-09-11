@@ -164,16 +164,18 @@ function ClerkProviderWithRoutes() {
         <TooltipProvider>
           <RoutedErrorBoundary>
             <Switch>
-              {/* Public route */}
+              {/* Public routes */}
               <Route path="/" component={HomePage} />
               <Route path="/reviews" component={ReviewsPage} />
-              <Route path="/business-portal" component={BusinessPortal} />
               
               {/* Auth routes */}
               <Route path="/sign-in/*?" component={SignInPage} />
               <Route path="/sign-up/*?" component={SignUpPage} />
               
-              {/* Portal routes */}
+              {/* Protected portals */}
+              <Route path="/business-portal">
+                <PortalRoute component={BusinessPortal} />
+              </Route>
               <Route path="/portal">
                 <PortalRoute component={PortalDashboard} />
               </Route>
